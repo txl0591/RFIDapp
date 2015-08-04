@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent" 
+    android:background="@color/windowBk_color">
+    
+    <ListView
+        android:id="@+id/UserlistView"
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentTop="true" 
+        android:listSelector="@drawable/listitem_select">
+    </ListView>
+    
+    <Button
+        android:id="@+id/AddUser"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="366dp"
+        android:drawableLeft="@android:drawable/ic_menu_add"
+        android:text="@string/RFID_AddUser" />
+    
+    <Button
+        android:id="@+id/DelUser"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="166dp"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
+        android:text="@string/RFID_DelUser" />
+
+</RelativeLayout>

@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="@color/windowBk_color"  >
+    
+<HorizontalScrollView
+    android:id="@+id/BrowerInfo"
+    android:layout_width="fill_parent"
+    android:layout_height="580dp"
+	>
+    <LinearLayout
+    android:id="@+id/linearLayout1" 
+	android:layout_height="fill_parent" 
+	android:layout_width="wrap_content" 
+	android:orientation="vertical"
+	> 
+	<com.rfid.Ctrl.ListCtrl 
+    android:id="@+id/BrowerTop" 
+    android:layout_width="4080dp" 
+	android:layout_height="wrap_content" 
+    /> 
+   <com.rfid.Ctrl.ListCtrl 
+    android:id="@+id/BrowerCard" 
+    android:layout_width="4080dp" 
+	android:layout_height="wrap_content" 
+    /> 
+   </LinearLayout>
+</HorizontalScrollView>   
+ 
+    <ImageView
+        android:id="@+id/SnapView"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentBottom="true" />
+
+<TextView
+        android:id="@+id/Text_Date"
+        android:layout_width="120dp"
+    	android:layout_height="24dp" 
+    	android:layout_alignParentBottom="true"
+        android:layout_alignParentLeft="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginLeft="20dp"
+    	android:textSize="20dp"   
+        />
+<Button
+        android:id="@+id/RFID_Show"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="546dp"
+        android:drawableLeft="@android:drawable/ic_menu_view"
+        android:text="@string/MIFARE_SHOW" />	
+
+<Button
+        android:id="@+id/RFID_Search_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="386dp"
+        android:drawableLeft="@android:drawable/ic_menu_search"
+        android:text="@string/RFID_Timer" />
+<Button
+        android:id="@+id/RFID_Add_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="226dp"
+        android:drawableLeft="@android:drawable/ic_menu_more"
+        android:text="@string/MIFARE_ADD" />
+	
+<Button
+        android:id="@+id/RFID_Edit_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="66dp"
+        android:drawableLeft="@android:drawable/ic_menu_edit"
+        android:text="@string/MIFARE_EDIT" />    
+    
+</RelativeLayout>

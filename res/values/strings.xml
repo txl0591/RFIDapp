@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">RFIDapp</string>
+    <string name="action_settings">Settings</string>
+    <string name="RFID_LogTitle">请输入用户名</string>
+    <string name="RFID_SJ_Snap">试件拍照</string>
+	<string name="RFID_Username">用户名</string>
+	<string name="RFID_Userpwd">密码</string>
+	<string name="RFID_Userlogin">登陆</string>
+	<string name="RFID_Userlogout">退出</string>
+	<string name="RFID_UsernameERR">未查到该用户名</string>
+	<string name="RFID_UsernameHaveERR">用户名已存在</string>
+	<string name="RFID_UserpwdERR">密码错误</string>
+	<string name="RFID_UserpwdSetting">密码设置</string>
+	<string name="RFID_GCDM">工程代号</string>
+	<string name="RFID_Save">保存</string>
+	<string name="RFID_SaveOk">保存成功</string>
+	<string name="RFID_SaveErr">保存失败</string>
+	<string name="RFID_AddUser">添加用户</string>
+	<string name="RFID_DelUser">删除用户</string>
+	<string name="RFID_Chip1">芯片卡号1</string>
+	<string name="RFID_Chip2">芯片卡号2</string>
+	<string name="RFID_Chip3">芯片卡号3</string>
+	<string name="RFID_ChipCard">芯片数</string>
+	<string name="RFID_Timer">按日期</string>
+	
+    <string name="RFID_CardOper">卡操作</string>
+    <string name="RFID_Brower">主页</string>
+    <string name="RFID_Read">读卡</string>
+    <string name="RFID_ReadStop">停止读卡</string>
+    <string name="RFID_Write">写卡</string>
+    <string name="RFID_PwdOper">密码操作</string>
+    <string name="RFID_ClearPwd">初始化卡</string>
+    <string name="RFID_DownloadPwd">密码下载</string>
+    <string name="RFID_Setting">设置</string>
+    <string name="RFID_SysSet">参数设置</string>
+    <string name="RFID_SysInfo">系统信息</string>
+    <string name="RFID_VersionS">软件版本</string>
+    <string name="RFID_VersionH">硬件版本</string>
+    <string name="RFID_VersionP">密码版本</string>
+    <string name="RFID_ClearPwdStart">开始初始化卡</string>
+    <string name="RFID_ClearPwdStop">停止初始化卡</string>
+    <string name="RFID_YES">是</string>
+    <string name="RFID_NO">否</string>
+    <string name="RFID_ClearHit">是否删除该卡密码！！！</string>
+    <string name="RFID_ClearHit_OK">删除该卡密码成功！</string>
+    <string name="RFID_ClearHit_ERR">删除该卡密码失败！</string>
+    
+    <string name="RFID_DelUserHit">是否删除该用户！！！</string>
+    <string name="RFID_DelUser_OK">删除该用户成功！</string>
+    <string name="RFID_DelUser_ERR">删除该用户失败！</string>
+    <string name="RFID_CanWrite_ERR">卡已满无法写入！</string>
+    
+    <string name="RFID_Del_OK">删除成功！</string>
+    
+    <string name="RFID_CARD_NOINIT">非法卡！</string>
+    <string name="RFID_CARD_HAVEWRITE">此卡已经使用！</string>
+    <string name="RFID_CARD_WRITEOK">写卡成功！</string>
+    <string name="RFID_CARD_WRITEErr">写卡失败！</string>
+     <string name="RFID_CARD_WRITEFULL">请填写所有内容！</string>
+    <string name="RFID_CARD_READErr">读卡失败！</string>
+    
+    <string name="MIFARE_1">试件编号:</string>
+	<string name="MIFARE_2">卡    号:</string>
+	<string name="MIFARE_3">工程名称:</string>
+	<string name="MIFARE_4">委托单位:</string>
+	<string name="MIFARE_5">施工单位:</string>
+	<string name="MIFARE_6">构件部位:</string>
+	<string name="MIFARE_7">见证单位:</string>
+	<string name="MIFARE_8">见 证 人:</string>
+	<string name="MIFARE_9">见证编号:</string>
+	<string name="MIFARE_10">拌制单位:</string>
+	<string name="MIFARE_11">配合比率:</string>
+	<string name="MIFARE_12">养护方式:</string>
+	<string name="MIFARE_13">强度等级:</string>
+	<string name="MIFARE_14">生产流水号:</string>
+	<string name="MIFARE_15">样品类型:</string>
+	<string name="MIFARE_16">制作日期:</string>	
+	<string name="MIFARE_17">检测机构:</string>
+	<string name="MIFARE_18">委托编号:</string>
+	<string name="MIFARE_19">样品编号:</string>
+	<string name="MIFARE_20">荷载值:</string>
+	<string name="MIFARE_21">抗压强度:</string>
+	<string name="MIFARE_22">试验时间:</string>
+	
+	<string name="MIFARE_SJBH">试件编号:</string>
+	<string name="MIFARE_CARD">卡    号:</string>
+	<string name="MIFARE_GCMC">工程名称:</string>
+	<string name="MIFARE_WTDW">委托单位:</string>
+	<string name="MIFARE_SGDW">施工单位:</string>
+	<string name="MIFARE_GJBW">构件部位:</string>
+	<string name="MIFARE_JZDW">见证单位:</string>
+	<string name="MIFARE_JZR">见 证 人:</string>
+	<string name="MIFARE_JZBH">见证编号:</string>
+	<string name="MIFARE_BZDW">拌制单位:</string>
+	<string name="MIFARE_PHBBH">配合比编号:</string>
+	<string name="MIFARE_YHFS">养护方式:</string>
+	<string name="MIFARE_QDDJ">强度等级:</string>
+	<string name="MIFARE_SCLSH">生产流水号:</string>
+	<string name="MIFARE_YPLX">样品类型:</string>
+	<string name="MIFARE_ZZRQ">制作日期:</string>	
+	<string name="MIFARE_JCJG">检测机构:</string>
+	<string name="MIFARE_WTBH">委托编号:</string>
+	<string name="MIFARE_YPBH">样品编号:</string>
+	<string name="MIFARE_ZHZ">荷载值:</string>
+	<string name="MIFARE_KYQD">抗压强度:</string>
+	<string name="MIFARE_SYSJ">试验时间:</string>
+
+    <string name="MIFARE_WRITE">写芯片</string>
+	<string name="MIFARE_CLEAR">删芯片</string>
+	<string name="MIFARE_EDIT">编辑</string>
+	<string name="MIFARE_DELECT">删除</string>
+	<string name="MIFARE_ADD">新增</string>
+	<string name="RFID_HIT">注意</string>
+	<string name="MIFARE_HIT_Write">该组组样品已经写完，开始下一组试件写卡</string>
+	<string name="MIFARE_SNAP">拍照</string>
+	<string name="MIFARE_SHOW">显示照片</string>
+	<string name="MIFARE_HIDE">隐藏照片</string>
+	<string name="MIFARE_SNAPSTART">开始</string>
+	<string name="MIFARE_SNAPSTOP">退出</string>
+	
+	<string-array name="YHFS" >
+	    <item>标准养护</item>
+	    <item>同条件拆模</item>
+	    <item>同条件(600°C天)</item>
+	</string-array>
+	
+	<string-array name="YPLX">
+	    <item>标准养护检验试块</item>
+	    <item>拆模检验试块</item>
+	    <item>同条件检验试块</item>
+	    <item>出厂检验标养试块</item>
+	    <item>交货检验标养试块</item>
+	</string-array>
+	
+	<string-array name="QDDJ" >
+	    <item>C10</item>
+	    <item>C15</item>
+	    <item>C20</item>
+	    <item>C25</item>
+	    <item>C30</item>
+	    <item>C35</item>
+	    <item>C40</item>
+	    <item>C45</item>
+	    <item>C50</item>
+	    <item>C55</item>
+	    <item>C60</item>
+	    <item>C65</item>
+	    <item>C70</item>
+	    <item>C75</item>
+	    <item>C80</item>
+	    <item>C85</item>
+	    <item>C90</item>
+	    <item>C95</item>
+	    <item>C100</item>
+	    <item>C105</item>
+	    <item>C110</item>
+	    <item>C115</item>
+	    <item>C120</item>
+	</string-array>
+</resources>

@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/windowBk_color"  >
+
+<LinearLayout
+    android:id="@+id/rfidwritebk"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:orientation="vertical"
+    >
+    <LinearLayout 
+        android:id="@+id/rfidline1"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+        <TextView
+        android:id="@+id/Text_SJBH_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_SJBH"    
+        />
+        <EditText 
+        android:id="@+id/Edit_SJBH_LEN"
+        android:layout_width="280dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="25"
+    	android:inputType="numberSigned"
+        />
+        
+        <TextView
+        android:id="@+id/Text_ZZRQ_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_16"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_ZZRQ_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="10"
+    	android:inputType="date"
+        />
+    </LinearLayout>
+    
+    <LinearLayout 
+        android:id="@+id/rfidline2"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_GCMC_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_GCMC"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_GCMC_LEN"
+        android:layout_width="440dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="60"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+    <LinearLayout 
+        android:id="@+id/rfidline3"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_WTDW_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_WTDW"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_WTDW_LEN"
+        android:layout_width="440dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="50"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+    <LinearLayout 
+        android:id="@+id/rfidline4"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_SGDW_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_SGDW"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_SGDW_LEN"
+        android:layout_width="440dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="50"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+    <LinearLayout 
+        android:id="@+id/rfidline5"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_JZDW_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_JZDW"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_JZDW_LEN"
+        android:layout_width="440dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="50"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:id="@+id/rfidline6"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_JZR_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_JZR"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_JZR_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="12"
+    	android:inputType="text"
+        />
+        
+        <TextView
+        android:id="@+id/Text_JZBH_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_JZBH"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_JZBH_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="30"
+    	android:inputType="numberSigned"
+        />
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:id="@+id/rfidline7"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_GJBW_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_GJBW"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_GJBW_LEN"
+        android:layout_width="440dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="70"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:id="@+id/rfidline8"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_YHFS_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_YHFS"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_YHFS_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="20"
+    	android:inputType="text"
+        />
+        
+        <Button
+        android:id="@+id/BUTTON_YHFS" 
+        android:layout_width="40dp"
+    	android:layout_height="fill_parent"
+    	android:background="@android:drawable/ic_menu_search"
+        />
+        
+        <TextView
+        android:id="@+id/Text_BZDW_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_BZDW"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_BZDW_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="40"
+    	android:inputType="text"
+        />
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:id="@+id/rfidline9"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_QDDJ_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_QDDJ"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_QDDJ_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="16"
+    	android:inputType="text"
+        />
+        
+        <Button
+        android:id="@+id/BUTTON_QDDJ" 
+        android:layout_width="40dp"
+    	android:layout_height="fill_parent"
+    	android:background="@android:drawable/ic_menu_search"
+        />
+        
+        <TextView
+        android:id="@+id/Text_YPLX_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_YPLX"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_YPLX_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="30"
+    	android:inputType="text"
+        />
+        
+        <Button
+        android:id="@+id/BUTTON_YPLX" 
+        android:layout_width="40dp"
+    	android:layout_height="fill_parent"
+    	android:background="@android:drawable/ic_menu_search"
+        />
+     </LinearLayout>
+     
+     <LinearLayout 
+        android:id="@+id/rfidline10"
+    	android:layout_width="fill_parent"
+    	android:layout_height="40dp"
+    	android:orientation="horizontal"
+        >
+    	<TextView
+        android:id="@+id/Text_PHBBH_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_PHBBH"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_PHBBH_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="20"
+    	android:inputType="text"
+        />
+        
+        <TextView
+        android:id="@+id/Text_SCLSH_LEN"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/MIFARE_SCLSH"    
+        />
+        
+        <EditText 
+        android:id="@+id/Edit_SCLSH_LEN"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent"
+    	android:textSize="20dp"
+    	android:maxLength="20"
+    	android:inputType="text"
+        />
+     </LinearLayout>     
+     
+     <LinearLayout
+         android:id="@+id/rfidline11"
+         android:layout_width="fill_parent"
+         android:layout_height="60dp"
+         android:orientation="horizontal" >
+
+	 <TextView
+        android:id="@+id/Text_Chip1"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"  
+    	android:text="@string/RFID_Chip1" 
+        />
+	 <CheckBox
+        android:id="@+id/Edit_Chip1"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+        />
+	  </LinearLayout>   
+	   
+	   <LinearLayout 
+        android:id="@+id/rfidline12"
+    	android:layout_width="fill_parent"
+    	android:layout_height="60dp"
+    	android:orientation="horizontal"
+        > 
+	 <TextView
+        android:id="@+id/Text_Chip2"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center"
+    	android:text="@string/RFID_Chip2"
+        />
+	 <CheckBox
+        android:id="@+id/Edit_Chip2"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+        />
+	 </LinearLayout>  
+	  <LinearLayout 
+        android:id="@+id/rfidline13"
+    	android:layout_width="fill_parent"
+    	android:layout_height="60dp"
+    	android:orientation="horizontal"
+        > 
+	 <TextView
+        android:id="@+id/Text_Chip3"
+        android:layout_width="120dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+    	android:gravity="center" 
+    	android:text="@string/RFID_Chip3"
+        />
+	 <CheckBox
+        android:id="@+id/Edit_Chip3"
+        android:layout_width="220dp"
+    	android:layout_height="fill_parent" 
+    	android:textSize="20dp"
+        />
+	 </LinearLayout>  
+</LinearLayout>  
+	<Button
+        android:id="@+id/RFID_Snap"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="546dp"
+        android:drawableLeft="@android:drawable/ic_menu_view"
+        android:text="@string/MIFARE_SNAP" />	
+
+	<Button
+        android:id="@+id/RFID_Write_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="386dp"
+        android:drawableLeft="@android:drawable/ic_menu_edit"
+        android:text="@string/MIFARE_WRITE" />
+	
+	<Button
+        android:id="@+id/RFID_Del_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="226dp"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
+        android:text="@string/MIFARE_CLEAR" />
+	
+	<Button
+        android:id="@+id/RFID_Save_Chip"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="66dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:text="@string/RFID_Save"
+        />
+	
+	<Button
+        android:id="@+id/RFID_SnapStart"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="226dp"
+        android:drawableLeft="@android:drawable/ic_menu_delete"
+        android:text="@string/MIFARE_SNAPSTART" />
+	
+	<Button
+        android:id="@+id/RFID_SnapStop"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
+        android:layout_marginBottom="21dp"
+        android:layout_marginRight="66dp"
+        android:drawableLeft="@android:drawable/ic_menu_save"
+        android:text="@string/MIFARE_SNAPSTOP"
+        />
+	
+	<SurfaceView
+        android:id="@+id/SnapView"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+</RelativeLayout>
