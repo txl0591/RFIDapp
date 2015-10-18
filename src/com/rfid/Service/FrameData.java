@@ -10,7 +10,7 @@ import com.rfid.Service.FrameTypeDef.*;
  */
 public class FrameData {
     public static final int FRAME_MIN = 9;
-    public static final String tag = "FRAME_DATA";
+    public static final String tag = "CoreSoft";
     public static byte ID = 0;
     public Context mContext = null;
     public IntentDef.OnCommDataReportListener mSerialDataListener =null;

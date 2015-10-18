@@ -250,7 +250,7 @@ public class RFIDBrower extends RFIDBase implements Button.OnClickListener,OnIte
 	    			String msjbh = mCursor.getString(mCursor.getColumnIndex(CardInfoDBHelper.TBL_SJBH));
 	    			mSJBHAll.add(msjbh);
 	    			byte[] sjbh = mCursor.getString(mCursor.getColumnIndex(CardInfoDBHelper.TBL_SJBH)).getBytes(); //ÊÂ¼þ±àºÅ
-	    			nString[0] = new String(sjbh,12,10);
+	    			nString[0] = new String(sjbh,(sjbh.length-10),10);
 	    			int ChipNum = mChipInfoDBHelper.getChipCount(msjbh);
 	    			nString[1] = Integer.toString(ChipNum); //Ð¾Æ¬Êý
 	    			String[] Chip = mChipInfoDBHelper.getChip(nString[0]);
@@ -359,7 +359,8 @@ public class RFIDBrower extends RFIDBase implements Button.OnClickListener,OnIte
 		// TODO Auto-generated method stub
 		switch(arg0.getId()){
 		case R.id.RFID_Edit_Chip:
-			gotoEditPage();
+			//gotoEditPage();
+			mMainClient.BeepOk();
 			break;
 			
 		case R.id.RFID_Add_Chip:

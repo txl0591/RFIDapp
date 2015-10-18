@@ -17,7 +17,7 @@ import com.rfid.Base.IntentDef;
 import com.rfid.Service.MainService;
 
 public class BaseClient {
-	private static final String tag="BaseClient";
+	private static final String tag="CoreSoft";
 	protected Context mContext = null;
 	protected MainService mMainService = null;
 	protected String mServiceName = null;

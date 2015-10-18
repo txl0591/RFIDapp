@@ -17,6 +17,7 @@
         android:inputType="text"
         android:gravity="center_vertical"
         />
+    
     <TextView
        android:id="@+id/UserPwd"
        android:layout_width = "wrap_content"

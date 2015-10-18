@@ -139,8 +139,10 @@ public class ServiceProcessor implements IntentDef.OnCommDataReportListener,Inte
                     mWriteThread.start();
                     mReadThread.start();
                     byte[] mbuffer = new byte[1];
-                    mbuffer[0] = FrameAddr.ADDR_ANDROID;
-                    SendNoAck(FrameCommond.RFID_POWER_SYNC, mbuffer, 1);
+                    mbuffer[0] = 2;
+                    SendNoAck(0x31, mbuffer, 1);
+                    
+                    
                 }
             } catch (IOException e) {
                 e.printStackTrace();
@@ -399,7 +401,7 @@ public class ServiceProcessor implements IntentDef.OnCommDataReportListener,Inte
     }
 
     public void SendFrame(int FrameCmd, int FrameType, int FrameAck, byte[] buffer, int bufferlen){
-        byte[] buf = new byte[256];
+    	byte[] buf = new byte[256];
         int len = mFrameData.SerialDataPack(buf, FrameCmd, FrameType, FrameAck, buffer, bufferlen);
         byte[] mbuffer = Arrays.copyOf(buf,len);
         try {

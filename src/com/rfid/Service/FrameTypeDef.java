@@ -4,7 +4,7 @@ package com.rfid.Service;
  * Created by root on 13-12-28.
  */
 public class FrameTypeDef {
-    public class FrameDef{
+	public class FrameDef{
         public static final int FRAME_START = 0;
         public static final int FRAME_VERSION = 1;
         public static final int FRAME_CTRL = 2;
@@ -32,28 +32,7 @@ public class FrameTypeDef {
         public static final int ACK_NEED = 0;
         public static final int ACK_NONEED = 1;
     }
-
-    public class FrameCommond{
-        public static final int RFID_ANTENNA     = 0x00;
-        public static final int RFID_CLR_PASSWD  = 0x11;
-        public static final int RFID_SET_PASSWD  = 0x12;
-        public static final int RFID_GET_PASSWD  = 0x13;
-        
-        public static final int RFID_SET_CRCBLK   = 0x14;
-        public static final int RFID_GET_CRCBLK   = 0x15;
-
-        public static final int RFID_WRITE_BLOCK = 0x21;
-        public static final int RFID_READ_BLOCK  = 0x22;
-        public static final int RFID_WRITE_MULT_BLOCK  = 0x23;
-        public static final int RFID_READ_MULT_BLOCK  = 0x24;
-        public static final int RFID_READ_CARDID = 0x25;
-
-        public static final int RFID_GET_VERSION = 0x30;
-        public static final int RFID_POWER_SYNC  = 0x31;
-        public static final int RFID_BEEP		 = 0x32;
-        public static final int RFID_RECOVER_SYS = 0x33;
-    }
-
+	
     public class FrameCommondEcho{
         public static final int ECHO_OK 			= 0x00;
         public static final int ECHO_ERR 			= 0x01;
@@ -63,79 +42,53 @@ public class FrameTypeDef {
         public static final int ECHO_ERR_WRITEDATA 	= 0x05;
         public static final int ECHO_ERR_READDATA 	= 0x06;
     }
-
-    public class RFIDBeep{
-        public static final int RFID_BEEP_OK = 0x00;
-        public static final int RFID_BEEP_ERR = 0x01;
-    }
-
-    public class RFIDAntenna{
-        public static final int RFID_ANTENNA_ON = 0x00;
-        public static final int RFID_ANTENNA_OFF = 0x01;
-    }
-    
-    public class RFIDMult{
-        public static final int READ_MULT_START = 0x01;
-        public static final int READ_MULT_CENTER = 0x10;
-        public static final int READ_MULT_END = 0x11;
-    }
-    
-    public class RFIDPwdMode{
-        public static final int RFID_PWD_A = 0x60;
-        public static final int RFID_PWD_B = 0x61;
-    }
-    
-    public class RFIDPwdType{
-        public static final int RFID_PWD_DEFAULT = 0x01;
-        public static final int RFID_PWD_GET = 0x00;
-    }
-    
-    public class RFIDUserBlk{
-        public static final int RFID_USER_START = 2;
-        public static final int RFID_USER_LEN = 11;
-    }
-    
-    public class RFIDCrcBlk{
-        public static final int RFID_CRC_START = 1;
-        public static final int RFID_CRC_LEN = 1;
+              
+    public class JNICommond{
+		public static final int JNI_BEEP_OK		        = 0x00;
+		public static final int JNI_BEEP_ERR            = 0x01;    
+		public static final int JNI_READ_USER           = 0x02;
+		public static final int JNI_READ_USERDEFAULT    = 0x03;
+		public static final int JNI_READ_SYSINFO        = 0x04;
+		public static final int JNI_W_USER_CARD         = 0x05;
+		public static final int JNI_W_CRCBLK_CARD       = 0x06;
+		public static final int JNI_W_CRCBLK_ROM        = 0x07;
+		public static final int JNI_RECOVERY_SYS        = 0x08;
+		public static final int JNI_GET_VERSION         = 0x09;
+		public static final int JNI_POWER_ON            = 0x0A;
+		public static final int JNI_GET_CARDID          = 0x0B;
+		public static final int JNI_GET_CARDTYPE        = 0x0C;
     }
     
     public class RFIDUserLen{
-    	public static final int  YPLX_LEN 	= 30;							//閺嶅嘲鎼х猾璇茬�
-    	public static final int  DevNum_LEN = 25;							//鐠囨洑娆㈢紓鏍у娇
-    	public static final int  GCMC_LEN 	= 60;							//瀹搞儳鈻奸崥宥囆�
-    	public static final int  WTDW_LEN 	= 50;							//婵梹澧崡鏇氱秴
-    	public static final int  SGDW_LEN 	= 50;							//閺傝棄浼愰崡鏇氱秴
-    	public static final int  GJBW_LEN 	= 70;							//閺嬪嫪娆㈤柈銊ょ秴
-    	public static final int  JZDW_LEN 	= 50;							//鐟欎浇鐦夐崡鏇氱秴			
-    	public static final int  JZR_LEN 	= 12;							//鐟欎浇鐦夋禍锟�
-    	public static final int  JZBH_LEN 	= 30;							//鐟欎浇鐦夌紓鏍у娇
-    	public static final int  BZDW_LEN 	= 40;							//閹峰苯鍩楅崡鏇氱秴
-    	public static final int  PHBBH_LEN 	= 20;							//闁板秴鎮庡В鏃傜椽閸欙拷
-    	public static final int  SCLSH_LEN 	= 20;							//閻㈢喍楠囧ù浣规寜閸欙拷
-    	public static final int  YHFS_LEN 	= 20;							//閸忕粯濮㈤弬鐟扮础	
-    	public static final int  QDDJ_LEN 	= 16;							//瀵搫瀹崇粵澶岄獓
-    	public static final int  ZZRQ_LEN 	= 10;							//閸掓湹缍旈弮銉︽埂
+    	public static final int  YPLX_LEN 	= 30;							//闁哄秴鍢查幖褏鐚剧拠鑼拷
+    	public static final int  DevNum_LEN = 25;							//閻犲洦娲戝▎銏㈢磽閺嵮冨▏
+    	public static final int  GCMC_LEN 	= 60;							//鐎规悶鍎抽埢濂稿触瀹ュ泦锟�
+    	public static final int  WTDW_LEN 	= 50;							//濠殿喗姊规晶顓㈠础閺囨氨绉�
+    	public static final int  SGDW_LEN 	= 50;							//闁哄倽妫勬导鎰板础閺囨氨绉�
+    	public static final int  GJBW_LEN 	= 70;							//闁哄瀚▎銏ゆ焾閵娿倗绉�
+    	public static final int  JZDW_LEN 	= 50;							//閻熸瑤娴囬惁澶愬础閺囨氨绉�			
+    	public static final int  JZR_LEN 	= 12;							//閻熸瑤娴囬惁澶嬬閿燂拷
+    	public static final int  JZBH_LEN 	= 30;							//閻熸瑤娴囬惁澶岀磽閺嵮冨▏
+    	public static final int  BZDW_LEN 	= 40;							//闁瑰嘲鑻崺妤呭础閺囨氨绉�
+    	public static final int  PHBBH_LEN 	= 20;							//闂佹澘绉撮幃搴⌒掗弮鍌滄そ闁告瑱鎷�
+    	public static final int  SCLSH_LEN 	= 20;							//闁汇垻鍠嶆鍥规担瑙勫瘻闁告瑱鎷�
+    	public static final int  YHFS_LEN 	= 20;							//闁稿繒绮慨銏ゅ棘閻熸壆纭�	
+    	public static final int  QDDJ_LEN 	= 16;							//鐎殿喖鎼�瑰磭绮垫径宀勭崜
+    	public static final int  ZZRQ_LEN 	= 10;							//闁告帗婀圭紞鏃堝籍閵夛附鍩�
     }
     
     public class RFIDSysLen{
-    	public static final int  JCJG_LEN 	=	50;						//濡拷绁撮張鐑樼�
-        public static final int  WTBH_LEN 	=	20;						//婵梹澧紓鏍у娇
-        public static final int  YPBH_LEN 	=	20;						//閺嶅嘲鎼х紓鏍у娇
-        public static final int  HZZ_LEN 	=	7;						//閼界柉娴囬崐纭风礄kN閿涳拷
-        public static final int  KYQD_LEN 	=	5;						//閹舵甯囧鍝勫(MPa)
-        public static final int  SYSJ_LEN 	=	19;						//鐠囨洟鐛欓弮鍫曟？
+    	public static final int  JCJG_LEN 	=	50;						//婵☆偓鎷风粊鎾嫉閻戞锟�
+        public static final int  WTBH_LEN 	=	20;						//濠殿喗姊规晶顓犵磽閺嵮冨▏
+        public static final int  YPBH_LEN 	=	20;						//闁哄秴鍢查幖褏绱撻弽褍濞�
+        public static final int  HZZ_LEN 	=	7;						//闁肩晫鏌夊ù鍥磹绾绀刱N闁挎冻鎷�
+        public static final int  KYQD_LEN 	=	5;						//闁硅埖顨呯敮鍥ь嚕閸濆嫬顔�(MPa)
+        public static final int  SYSJ_LEN 	=	19;						//閻犲洦娲熼悰娆撳籍閸洘锛�
     }
     
     public class RFIDShowMaxLen{
     	public static final int RFIDUserMax = 15;
     	public static final int RFIDSysMax = 6;
     }
-
-    public class RFIDSysBlk{
-        public static final int RFID_SYS_START = 13;
-        public static final int RFID_SYS_LEN = 3;
-    }
-    
     
 }

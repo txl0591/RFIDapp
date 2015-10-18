@@ -50,6 +50,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		CardNum  = new byte[6];
 		mUser = User;
 		mUserType = UserType;
+		JNI_Init();
 	}
 	
 	public void MainClientStop(){
@@ -115,12 +116,11 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		};
 		
 		byte[] buffer = new byte[48];
-		byte[] encrypt = new byte[48];
 		int len = RecvbufferLen;
 		
-		for(int i = 0; i < RFIDUserBlk.RFID_USER_LEN; i++){
+		for(int i = 0; i < 11; i++){
 			System.arraycopy(Recvbuffer, 48*i, buffer, 0, 48);
-			Common.Decrypt(buffer, encrypt);
+			byte[] encrypt = JNI_Decrypt(buffer);
 			System.arraycopy(encrypt, 0, Recvbuffer, 48*i, 48);
 		}
 		
@@ -157,12 +157,11 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		};
 		
 		byte[] buffer = new byte[48];
-		byte[] encrypt = new byte[48];
 		int len = RecvbufferLen;
 		
-		for(int i = 0; i < RFIDSysBlk.RFID_SYS_LEN; i++){
+		for(int i = 0; i < 3; i++){
 			System.arraycopy(Recvbuffer, 48*i, buffer, 0, 48);
-			Common.Decrypt(buffer, encrypt);
+			byte[] encrypt = JNI_Decrypt(buffer);
 			System.arraycopy(encrypt, 0, Recvbuffer, 48*i, 48);
 		}
 		
@@ -205,7 +204,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		int i;
 		if(Data[0] == FrameCommondEcho.ECHO_OK){
 			switch (Data[1]){
-			case RFIDMult.READ_MULT_START:
+			case 0x01:
 				for(i = 0; i < 6; i++){
 					CardNum[i] = (byte) (Data[2+i]);
 				}
@@ -215,14 +214,14 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 				RecvbufferLen = 0;
 				break;
 					
-			case RFIDMult.READ_MULT_CENTER:
+			case 0x10:
 				for(i = 0; i < 16; i++){
 					Recvbuffer[RecvbufferLen] = Data[2+i];
 					RecvbufferLen++;
 				}
 				break;
 				
-			case RFIDMult.READ_MULT_END:
+			case 0x11:
 				if(mOperState ==  RFIDOper.RFID_READ_USER){
 					ReadUserMultBytetoString();
 				}else{
@@ -254,7 +253,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		if(mOperState == RFIDOper.RFID_WRITE_USER || mOperState == RFIDOper.RFID_WRITE_SYS){			
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				WriteUserCardOper();
-				if(Data[1] == RFIDMult.READ_MULT_END){
+				if(Data[1] == 0x11){
 					BeepOk();
 				}
 			}else{
@@ -291,15 +290,15 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 	public void OnResponsionReport(int Id, int Cmd, int Ack, byte[] Data, int DataLen) {
 		
 		switch (Cmd){
-		case FrameCommond.RFID_READ_MULT_BLOCK:
+		case 0x24:
 			ReadMultBlk(Data,DataLen);
 			break;
 			
-		case FrameCommond.RFID_WRITE_MULT_BLOCK:
+		case 0x23:
 			WriteMultBlk(Data,DataLen);
 			break;
 			
-		case FrameCommond.RFID_RECOVER_SYS:
+		case 0x33:
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				BeepOk();	
 			}else{
@@ -307,11 +306,11 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 			}
 			break;
 			
-		case FrameCommond.RFID_GET_VERSION:	
+		case 0x30:	
 			GetVersionOper(Data,DataLen);
 			break;
 			
-		case FrameCommond.RFID_CLR_PASSWD:
+		case 0x11:
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				setStateReport(RFIDState.RFID_CLEAR_PWD_SUCCESS, null);
 			}else{
@@ -320,7 +319,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 			}
 			break;
 			
-		case FrameCommond.RFID_WRITE_BLOCK:
+		case 0x21:
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				setStateReport(RFIDState.RFID_WRITE_SUCCESS, null);
 			}else{
@@ -328,7 +327,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 			}
 			break;
 			
-		case FrameCommond.RFID_READ_CARDID:
+		case 0x25:
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				byte[] card = new byte[6];
 				for (int i = 0; i < 6; i++){
@@ -340,7 +339,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 			}
 			break;
 			
-		case FrameCommond.RFID_GET_CRCBLK:
+		case 0x15:
 			if(Data[0] == FrameCommondEcho.ECHO_OK){
 				byte[] card = new byte[7];
 				for (int i = 0; i < 7; i++){
@@ -358,14 +357,14 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 	@Override
 	public void OnDistributeReport(int Id, int Cmd, int Ack, byte[] Data, int DataLen) {
 		switch (Cmd){
-		case FrameCommond.RFID_POWER_SYNC:
+		case 0x31:
 			PowerOnInit();
 			break;
 		}
 	}
 
     public void SendAck(int FrameCmd,byte[] buffer, int bufferlen){
-        mMainService.SendAck(FrameCmd, buffer, bufferlen);
+    	mMainService.SendAck(FrameCmd, buffer, bufferlen);
     }
 
     public void SendNoAck(int FrameCmd,byte[] buffer, int bufferlen){
@@ -377,29 +376,19 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     }
 
     public void BeepOk(){
-        byte[] buffer = new byte[1];
-        buffer[0] = RFIDBeep.RFID_BEEP_OK;
-        SendAck(FrameCommond.RFID_BEEP, buffer, buffer.length);
+        JNI_SendCommondV(JNICommond.JNI_BEEP_OK);
     }
 
     public void BeepErr(){
-        byte[] buffer = new byte[1];
-        buffer[0] = RFIDBeep.RFID_BEEP_ERR;
-        SendAck(FrameCommond.RFID_BEEP, buffer, buffer.length);
+        JNI_SendCommondV(JNICommond.JNI_BEEP_ERR);
     }
     
     public void ReadUserInfo(String[] nstring){
     	if(mOperState == RFIDOper.RFID_OPER_NONE){
     		mCardNum = null;
         	mOperState = RFIDOper.RFID_READ_USER;
-        	mReadbuf = nstring;
-        	byte[] buffer = new byte[5];
-        	buffer[0] = 0x00;
-        	buffer[1] = RFIDUserBlk.RFID_USER_START;
-        	buffer[2] = RFIDUserBlk.RFID_USER_LEN;
-        	buffer[3] = RFIDPwdMode.RFID_PWD_A;
-        	buffer[4] = RFIDPwdType.RFID_PWD_GET;
-        	SendAck(FrameCommond.RFID_READ_MULT_BLOCK, buffer, buffer.length);
+        	mReadbuf = nstring;        	
+        	JNI_SendCommondV(JNICommond.JNI_READ_USER);
     	}
     }
     
@@ -407,44 +396,26 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     	if(mOperState == RFIDOper.RFID_OPER_NONE){
     		mCardNum = null;
         	mOperState = RFIDOper.RFID_READ_USER;
-        	mReadbuf = nstring;
-        	byte[] buffer = new byte[5];
-        	buffer[0] = 0x00;
-        	buffer[1] = RFIDUserBlk.RFID_USER_START;
-        	buffer[2] = RFIDUserBlk.RFID_USER_LEN;
-        	buffer[3] = RFIDPwdMode.RFID_PWD_A;
-        	buffer[4] = RFIDPwdType.RFID_PWD_DEFAULT;
-        	SendAck(FrameCommond.RFID_READ_MULT_BLOCK, buffer, buffer.length);
+        	mReadbuf = nstring;        	
+        	JNI_SendCommondV(JNICommond.JNI_READ_USERDEFAULT);
     	}
     }
     
     public void ReadSysInfo(String[] nstring){
     	mOperState = RFIDOper.RFID_READ_SYS;
     	mReadbuf = nstring;
-    	ReadSysMultBytetoString();
-    	
-    	byte[] buffer = new byte[5];
-    	buffer[0] = 0x00;
-    	buffer[1] = RFIDSysBlk.RFID_SYS_START;
-    	buffer[2] = RFIDSysBlk.RFID_SYS_LEN;
-    	buffer[3] = RFIDPwdMode.RFID_PWD_A;
-    	buffer[4] = RFIDPwdType.RFID_PWD_GET;
-    	SendAck(FrameCommond.RFID_READ_MULT_BLOCK, buffer, buffer.length);
+    	ReadSysMultBytetoString();    	
+    	JNI_SendCommondV(JNICommond.JNI_READ_SYSINFO);
     }
         
     public void WriteUserCardOper(){
     	if(null != mWritebuf && mWriteBufLen < mWritebuf.length){
     		int blk = mWriteBufLen/48;
     		int blkindex = (mWriteBufLen%48)/16;
-    		
-    		byte[] buffer = new byte[20];
-        	buffer[0] = 0x00;
-        	buffer[1] = (byte) (mWriteBlk+blk);
-        	buffer[2] = (byte) blkindex;
-        	buffer[3] = RFIDPwdMode.RFID_PWD_A;
-        	System.arraycopy(mWritebuf, mWriteBufLen, buffer, 4, 16);
+    		byte[] buffer = new byte[16];
+        	System.arraycopy(mWritebuf, mWriteBufLen, buffer, 0, 16);
         	mWriteBufLen+=16;
-        	SendAck(FrameCommond.RFID_WRITE_MULT_BLOCK, buffer, buffer.length);
+    		JNI_SendCommondO(JNICommond.JNI_W_USER_CARD, mWriteBlk+blk, blkindex, buffer);
     	}else{
     		mOperState = RFIDOper.RFID_OPER_NONE;
     		
@@ -462,7 +433,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     public void WriteUserInfo(byte[] buf){
     	if(mOperState == RFIDOper.RFID_OPER_NONE){
     		mOperState = RFIDOper.RFID_WRITE_USER;
-    		mWriteBlk = RFIDUserBlk.RFID_USER_START;
+    		mWriteBlk = 0x02;
     		mWritebuf = buf;
     		
     		int blk = mWritebuf.length/48;
@@ -470,10 +441,8 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     		for(int i = 0; i < blk; i++){
     			
     			byte[] buffer = new byte[48];
-    			byte[] encrypt = new byte[48];
-    			
-				System.arraycopy(mWritebuf, 48*i, buffer, 0, 48);
-				Common.Encryption(buffer, encrypt);
+   				System.arraycopy(mWritebuf, 48*i, buffer, 0, 48);
+				byte[] encrypt =  JNI_Encryption(buffer);
 				System.arraycopy(encrypt, 0, mWritebuf, 48*i, 48);			
     		}
         	mWriteBufLen = 0;
@@ -481,70 +450,33 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     	}
     }
         
-    public void WriteCrcBlkToCard(int CardType){
-    	byte[] crc ={0x2A,0x61,0x66,0x5E,0x66,0x39,0x6F,0x32,0x77,0x35,0x66,0x76,0x46,0x31,0x23,0x51,(byte) 0xFF,(byte) 0xFF};
-    	byte[] buffer = new byte[21];
-    	buffer[0] = 0x00;
-    	buffer[1] = (byte) RFIDCrcBlk.RFID_CRC_START;
-    	buffer[2] = RFIDPwdMode.RFID_PWD_A;
-    	
-    	switch (CardType){
-    	case RFID_CARD_TYPE.RFID_CARD_NONE:
-    		break;
-    	case RFID_CARD_TYPE.RFID_CARD_INIT:
-    		crc[16] = 0x00;
-    		crc[17] = 0x00;
-    		break;	
-    	case RFID_CARD_TYPE.RFID_CARD_USER:
-    		crc[16] = 0x01;
-    		break;
-    	case RFID_CARD_TYPE.RFID_CARD_SYS:
-    		crc[17] = 0x01;
-    		break;
-    	case RFID_CARD_TYPE.RFID_CARD_ALL:
-    		crc[16] = 0x01;
-    		crc[17] = 0x01;
-    		break;
-    	}
-    	System.arraycopy(crc, 0, buffer, 3, 18);
-    	SendAck(FrameCommond.RFID_WRITE_BLOCK, buffer, buffer.length);
+    public void WriteCrcBlkToCard(int CardType){    	
+    	JNI_SendCommondI(JNICommond.JNI_W_CRCBLK_CARD,CardType);
     }
 
     public void WriteCrcBlkToRom(){
-    	byte[] crc ={0x2A,0x61,0x66,0x5E,0x66,0x39,0x6F,0x32,0x77,0x35,0x66,0x76,0x46,0x31,0x23,0x51};
-    	SendAck(FrameCommond.RFID_SET_CRCBLK, crc, crc.length);
+    	JNI_SendCommondV(JNICommond.JNI_W_CRCBLK_ROM);
     }
         
     public void RecoverSys(){
-    	 byte[] buffer = new byte[1];
-    	 buffer[0] = 0;
-    	SendAck(FrameCommond.RFID_RECOVER_SYS, buffer, buffer.length);
+    	JNI_SendCommondV(JNICommond.JNI_RECOVERY_SYS);
     }
     
     public void GetVersion(String[] str){
-    	byte[] buffer = new byte[1];
-    	buffer[0] = 0;
     	mReadbuf = str;
-    	SendAck(FrameCommond.RFID_GET_VERSION, buffer, buffer.length);
+    	JNI_SendCommondV(JNICommond.JNI_GET_VERSION);
     }
     
     public void PowerOnInit(){
-    	byte[] buffer = new byte[1];
-    	buffer[0] = FrameAddr.ADDR_ANDROID;
-    	SendNoAck(FrameCommond.RFID_POWER_SYNC, buffer, buffer.length);
+    	JNI_SendCommondV(JNICommond.JNI_POWER_ON);
     }
     
     public void GetCardId(){
-    	byte[] buffer = new byte[1];
-        buffer[0] = 0;
-        SendAck(FrameCommond.RFID_READ_CARDID, buffer, buffer.length);
+        JNI_SendCommondV(JNICommond.JNI_GET_CARDID);
     }
     
     public void GetCardType(){
-    	byte[] buffer = new byte[4];
-    	buffer[0] = (byte) 0x00;
-    	buffer[1] = RFIDPwdMode.RFID_PWD_A;
-    	SendAck(FrameCommond.RFID_GET_CRCBLK, buffer, buffer.length);
+    	JNI_SendCommondV(JNICommond.JNI_GET_CARDTYPE);
     }
     
     public String getWIFIMac(){
@@ -556,14 +488,17 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		BluetoothAdapter m_BluetoothAdapter = BluetoothAdapter.getDefaultAdapter();      
 		return m_BluetoothAdapter.getAddress();
 	}
-    
-//  	static
-//  	{
-//  		System.loadLibrary("RFIDJni");
-//  	}	
-//
-//  	public native boolean JNI_Init(String Send, String Recv);
-//  	public native boolean JNI_Open(Context context);
-//  	public native boolean JNI_Send(byte[] Data);
+    	
+  	static
+  	{	
+  		System.loadLibrary("RFIDJni");
+  	}	
+
+  	public native boolean JNI_Init();
+  	public native boolean JNI_SendCommondV(int cmd);
+  	public native boolean JNI_SendCommondI(int cmd, int param);
+  	public native boolean JNI_SendCommondO(int cmd, int param1, int param2, byte[] Data);
+  	public native byte[] JNI_Encryption(byte[] Data);
+  	public native byte[] JNI_Decrypt(byte[] Data);
 }
 

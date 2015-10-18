@@ -460,36 +460,6 @@ public class Common {
 			return sResult;
 		}
 		
-		public static void Decrypt(byte[] InChar, byte[] OutChar){   
-			int i,c;   
-		  
-		    int jiemibox[]={15,18,3,20,21,16,10,11,14,8,24,12,9,5,1,6,19,2,22,17,13,7,23,4};
-			for(i=0;i<InChar.length;i++)   
-			{   
-				c=i/24;   
-				if (InChar[i] > jiemibox[i%24])
-				{
-					OutChar[jiemibox[i%24]+c*24-1]=(byte) (InChar[i]-jiemibox[i%24]+1);   
-				}
-				else
-				{
-					OutChar[jiemibox[i%24]+c*24-1]=(byte) (InChar[i]+256-jiemibox[i%24]+1);   
-				}
-			}   
-		}
-		
-		public static void Encryption(byte[] InChar, byte[] OutChar){   
-			int i,c;   
-		  
-		    int jiemibox[]={15,18,3,20,21,16,10,11,14,8,24,12,9,5,1,6,19,2,22,17,13,7,23,4};
-
-			for(i=0;i<InChar.length;i++)   
-			{   
-				c=i/24;   
-				OutChar[i] =(byte) (InChar[jiemibox[i%24]+c*24-1]+jiemibox[i%24]-1);
-			}   
-		}
-		
 		public static String getMac(){
 			String mac = null;
 			String macSerial = null;
