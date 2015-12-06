@@ -13,7 +13,8 @@ public class IntentDef {
     public static final String MODULE_DISTRIBUTE	="rfid.intent.action.MODULE_DISTRIBUTE";
     
     public static final String BROADCAST_MAIN = "com.rfid.action.MainActivity";
-    public static final String BROADCAST_RFID = "com.rfid.action.RFID";
+    public static final String BROADCAST_RFID_OFFLINE = "com.rfid.action.RFIDOffLine";
+    public static final String BROADCAST_RFID_ONLINE = "com.rfid.action.RFIDOnLine";
     public static final String BROADCAST_WRITEHIT = "com.rfid.action.RFID.WRITEHIT";
 
     public static final String INTENT_COMM_ID				="rfid.intent.netcomm.ID";

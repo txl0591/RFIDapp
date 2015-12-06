@@ -86,6 +86,6 @@
         android:layout_marginBottom="21dp"
         android:layout_marginRight="66dp"
         android:drawableLeft="@android:drawable/ic_menu_edit"
-        android:text="@string/MIFARE_EDIT" />    
+        android:text="@string/MIFARE_CHECK" />    
     
 </RelativeLayout>

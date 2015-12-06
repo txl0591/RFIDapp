@@ -21,7 +21,7 @@ import java.util.TimerTask;
  */
 public class ServiceProcessor implements IntentDef.OnCommDataReportListener,IntentDef.OnUsbCoreReportListener ,IntentDef.OnBluetoothCoreReportListener{
 
-    private static final String tag = "ServiceProcessor";
+    private static final String tag = "CoreSoft";
     private static final int CONNECT_USB = 0x00;
     private static final int CONNECT_BLUETOOTH = 0x01;
     private static final int COM_RECV_HEAD = 0x00;
@@ -165,7 +165,7 @@ public class ServiceProcessor implements IntentDef.OnCommDataReportListener,Inte
             } catch (IOException e) {
                 e.printStackTrace();
             }
-            Intent mIntent = new Intent(IntentDef.BROADCAST_RFID);
+            Intent mIntent = new Intent(IntentDef.BROADCAST_RFID_OFFLINE);
             mContext.sendBroadcast(mIntent);
         }
     }
@@ -430,7 +430,7 @@ public class ServiceProcessor implements IntentDef.OnCommDataReportListener,Inte
             while(mWriteThreadRun){
                 try {
                     SendFrame mSendFrame = mSendBuffer.SendBufferGet();
-                    if(null != mSendFrame){
+                    if(null != mSendFrame){                    	
                         SendFrame(mSendFrame.FrameCmd, mSendFrame.FrameSend, mSendFrame.FrameAck,
                                 mSendFrame.buffer, mSendFrame.bufferlen);
                     }

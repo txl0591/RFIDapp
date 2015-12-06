@@ -35,6 +35,9 @@ import android.graphics.Rect;
 import android.graphics.YuvImage;
 import android.graphics.drawable.BitmapDrawable;
 import android.hardware.Camera;
+import android.media.AudioManager;
+import android.media.MediaPlayer;
+import android.net.Uri;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.SurfaceHolder;
@@ -51,13 +54,14 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.PopupWindow;
 import android.widget.TextView;
 import android.widget.Toast;
 
 public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,OnStateReportListener, OnItemClickListener {
-	private final static String tag = "RFIDWriteCard";
+	private final static String tag = "CoreSoft";
 	
 	private ProgressDialog mProgressDialog; 
 	private TextView Text_SJBH_LEN = null;
@@ -143,10 +147,12 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 	private SurfaceHolder mSurfaceHolder = null;  
 	private Camera mCamera =null;    
 	private Bitmap mBitmap = null;
+	private ImageView mImageView = null;
 	private boolean mSaveBmp = false;
 	private boolean mSurfaceSnap = false;
 	private int ImageWidth = 320;
 	private int ImageHeight = 240;
+	private boolean mShowBmp = false;
 	
 	public RFIDWriteCard(Context context, String action, int Id) {
 		super(context, action, Id);
@@ -222,6 +228,9 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 		RFID_SnapStop.setVisibility(View.INVISIBLE);
 		mSurfaceview = (SurfaceView) findViewById(R.id.SnapView);
 		mSurfaceview.setVisibility(View.INVISIBLE);
+		mImageView = (ImageView)findViewById(R.id.ImagePic);
+		mImageView.setVisibility(View.INVISIBLE);
+		
 		mSurfaceHolder = mSurfaceview.getHolder(); 
 		mSurfaceHolder.addCallback(new Callback(){
 
@@ -337,7 +346,6 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 			break;
 			
 		case R.id.RFID_Save_Chip:
-			WriteToDB();
 			ChangeToDB();
 			break;
 			
@@ -354,14 +362,13 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 			break;
 			
 		case R.id.RFID_SnapStart:
-			Log.d(tag,"==========================RFID_SnapStart");
 			if(mSurfaceSnap){
 				mSaveBmp = true;
+				shootSound();
 			}
 			break;
 			
 		case R.id.RFID_SnapStop:
-			Log.d(tag,"==========================RFID_SnapStop");
 			if(mSurfaceSnap){
 				ShowSurfaceView(false);
 			}
@@ -370,6 +377,11 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 	}
 	
 	public void deletecard(){
+		
+		if(false == Text_Chip1.isChecked() && false == Text_Chip2.isChecked() && false == Text_Chip3.isChecked())
+		{
+			return;
+		}
 		if(Text_Chip1.isChecked()){
 			mChipInfoDBHelper.deletecard(Edit_SJBH_LEN.getText().toString(), Text_Chip1.getText().toString());
 		}
@@ -485,12 +497,12 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 				Edit_ZZRQ_LEN,
 		};	
 		
-//		if(clear == 1){
-//			for(int i = 0; i < mEditTextList.length; i++){
-//				EditText mEditText = mEditTextList[i];
-//				mEditText.setText("");
-//			}		
-//		}
+		if(clear == 1){
+			for(int i = 0; i < mEditTextList.length; i++){
+				EditText mEditText = mEditTextList[i];
+				mEditText.setText("");
+			}		
+		}
 		
 		SimpleDateFormat sDateFormat = new SimpleDateFormat("yyyy-MM-dd");   
 		String date = sDateFormat.format(new java.util.Date()); 
@@ -799,6 +811,13 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 				getCardInfoFromDB(mMainClient.getSJBH());
 			}
 			setdefalutEditText(1);
+			if(mEdit == 0){			
+				mShowBmp = false;
+			}
+			else{
+				mShowBmp = true;
+			}
+			Showbmp();
 		}
 		else{
 			if(mCardInfoDBHelper != null){
@@ -814,7 +833,8 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 				mChipInfoDBHelper = null;
 			}
 			mEdit = 0;
-			HideProcDailog();	
+			HideProcDailog();
+			mImageView.setVisibility(View.INVISIBLE);
 			if(mSurfaceSnap){
 				ShowSurfaceView(false);
 			}
@@ -858,7 +878,35 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 		mPopupWindow.dismiss();
 	}
 	
+	private void Showbmp(){
+		if(mShowBmp){
+			byte[] Data = null;
+			Data = mSnapInfoDBHelper.getData(Edit_SJBH_LEN.getText().toString());
+			if(Data != null){
+				Bitmap mBitmap = BitmapFactory.decodeByteArray(Data, 0, Data.length);
+				mImageView.setImageBitmap(mBitmap);
+				mImageView.setVisibility(View.VISIBLE);
+			}
+		}
+	}
+	
+	public void shootSound()  
+	{  
+		MediaPlayer shootMP = null;
+	    AudioManager meng = (AudioManager) getContext().getSystemService(Context.AUDIO_SERVICE);  
+	    int volume = meng.getStreamVolume( AudioManager.STREAM_NOTIFICATION);  
+	  
+	    if (volume != 0)  
+	    {  
+	        if (shootMP == null)  
+	            shootMP = MediaPlayer.create(getContext(), Uri.parse("file:///system/media/audio/ui/camera_click.ogg"));  
+	        if (shootMP != null)  
+	            shootMP.start();  
+	    }  
+	} 
+	
 	public void openCamera(){
+		mImageView.setVisibility(View.INVISIBLE);
 		mCamera = Camera.open();
 		try {
 			mCamera.setPreviewDisplay(mSurfaceHolder);
@@ -868,6 +916,7 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 			if (null != mCamera) {
 				mCamera.release();
 				mCamera = null;
+				Showbmp();
 			}
 		}
 		
@@ -891,6 +940,7 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
                             mBitmap = BitmapFactory.decodeByteArray(stream.toByteArray(), 0, stream.size());
                             mSnapInfoDBHelper.addsnap(Edit_SJBH_LEN.getText().toString(), stream.size(), stream.toByteArray());
                             mSaveBmp = false;
+                            mShowBmp = true;
                             ShowSurfaceView(false);
                         }
                 	}
@@ -907,6 +957,7 @@ public class RFIDWriteCard extends RFIDBase implements Button.OnClickListener,On
 			mCamera.release();
 			mCamera = null;
 		}
+		Showbmp();
 	}
 	
 	public void ShowSurfaceView(boolean state){	

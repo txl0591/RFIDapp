@@ -24,6 +24,8 @@
 	<string name="RFID_Chip3">芯片卡号3</string>
 	<string name="RFID_ChipCard">芯片数</string>
 	<string name="RFID_Timer">按日期</string>
+	<string name="RFID_Offline">设备离线！！！</string>
+	<string name="RFID_Online">设备在线！！！</string>
 	
     <string name="RFID_CardOper">卡操作</string>
     <string name="RFID_Brower">主页</string>
@@ -112,6 +114,7 @@
 	<string name="MIFARE_EDIT">编辑</string>
 	<string name="MIFARE_DELECT">删除</string>
 	<string name="MIFARE_ADD">新增</string>
+	<string name="MIFARE_CHECK">详情</string>
 	<string name="RFID_HIT">注意</string>
 	<string name="MIFARE_HIT_Write">该组组样品已经写完，开始下一组试件写卡</string>
 	<string name="MIFARE_SNAP">拍照</string>

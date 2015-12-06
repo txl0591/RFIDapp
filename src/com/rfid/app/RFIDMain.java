@@ -21,6 +21,7 @@ import android.content.IntentFilter;
 import android.content.DialogInterface.OnClickListener;
 import android.content.pm.ActivityInfo;
 import android.content.Intent;
+import android.net.wifi.WifiManager;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -112,11 +113,20 @@ public class RFIDMain extends Activity implements OnItemClickListener,OnStateRep
 		LoadList();
 		mViewCtrl.AddShow(ID_BROWER);
 		StartRecvMsg();
+		OpenWifi();
+	}
+	
+	public void OpenWifi(){
+		WifiManager mWifiManager = (WifiManager) this.getSystemService(Context.WIFI_SERVICE);
+		if (!mWifiManager.isWifiEnabled()){
+			mWifiManager.setWifiEnabled(true);
+		}
 	}
 	
 	public void StartRecvMsg(){
 		IntentFilter filter = new IntentFilter();
-		filter.addAction(IntentDef.BROADCAST_RFID);
+		filter.addAction(IntentDef.BROADCAST_RFID_OFFLINE);
+		filter.addAction(IntentDef.BROADCAST_RFID_ONLINE);
 		this.registerReceiver(MainReceiver, filter);
 	}
 
@@ -259,11 +269,14 @@ public class RFIDMain extends Activity implements OnItemClickListener,OnStateRep
 		public void onReceive(Context arg0, Intent arg1) {
 			// TODO Auto-generated method stub
 			String action = arg1.getAction();
-			if(action.equals(IntentDef.BROADCAST_RFID)){
-				mMainClient.MainClientStop();
-				Intent nIntent = new Intent(IntentDef.BROADCAST_MAIN);
-				sendBroadcast(nIntent);
-				finish();
+			if(action.equals(IntentDef.BROADCAST_RFID_OFFLINE)){
+//				mMainClient.MainClientStop();
+//				Intent nIntent = new Intent(IntentDef.BROADCAST_MAIN);
+//				sendBroadcast(nIntent);
+//				finish();
+				Toast.makeText(arg0, getResources().getString(R.string.RFID_Offline), Toast.LENGTH_LONG).show();
+			}else if(action.equals(IntentDef.BROADCAST_RFID_ONLINE)){
+				Toast.makeText(arg0, getResources().getString(R.string.RFID_Online), Toast.LENGTH_LONG).show();
 			}
 		}
 		

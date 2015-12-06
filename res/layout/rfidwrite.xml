@@ -503,6 +503,13 @@
         android:text="@string/MIFARE_SNAPSTOP"
         />
 	
+	<ImageView 
+	    android:id="@+id/ImagePic"
+        android:layout_width="320dp"
+        android:layout_height="240dp"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true" />
+	
 	<SurfaceView
         android:id="@+id/SnapView"
         android:layout_width="320dp"

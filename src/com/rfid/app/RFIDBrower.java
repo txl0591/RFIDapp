@@ -46,9 +46,9 @@ public class RFIDBrower extends RFIDBase implements Button.OnClickListener,OnIte
 	private final static String ZZRQ_STRING = "ZZRQ";
 	private final static int RFIDBROWER_LOAD = 0xF1;
 	private final static int LISTWidth[] = {
-		560, 150,   400, 250, 300,
-		400, 800, 800, 800, 800, 
-		200, 800, 240, 260, 260, 260,  300, 300, 300};
+		300, 100, 250, 150, 150,
+		250, 300, 300, 300, 300, 
+		100, 300, 150, 150, 150, 150,  150, 150, 150};
 	
 	private ListCtrl mListView = null;
 	private ListCtrl mListTop = null;
@@ -359,8 +359,7 @@ public class RFIDBrower extends RFIDBase implements Button.OnClickListener,OnIte
 		// TODO Auto-generated method stub
 		switch(arg0.getId()){
 		case R.id.RFID_Edit_Chip:
-			//gotoEditPage();
-			mMainClient.BeepOk();
+			gotoEditPage();
 			break;
 			
 		case R.id.RFID_Add_Chip:
@@ -442,6 +441,7 @@ public class RFIDBrower extends RFIDBase implements Button.OnClickListener,OnIte
 					nZZRQ = data;
 					LoadThread mLoadThread = new LoadThread(data);
 					mLoadThread.start();
+					mDataText.setText(data);
 				}
 		
 	};

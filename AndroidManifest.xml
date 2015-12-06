@@ -2,7 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.rfid.app"
     android:versionCode="1"
-    android:versionName="1.2" >
+    android:versionName="1.3" >
 	
     <uses-feature android:name="android.hardware.usb.host" />
     <uses-feature android:name="android.hardware.camera" />
@@ -47,7 +47,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/rfid"
-        android:label=" "
+        android:label="   http://www.fjcoresoft.com"
         android:theme="@style/AppTheme" >
         <activity
             android:name="com.rfid.app.MainActivity"
@@ -57,7 +57,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         <intent-filter>
-          <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" /> 
+         <!--  <action android:name="android.hardware.usb.action.USB_DEVICE_ATTACHED" /> --> 
           <action android:name="android.hardware.usb.action.USB_DEVICE_DETACHED" />
         </intent-filter>
 

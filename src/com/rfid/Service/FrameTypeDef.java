@@ -60,16 +60,16 @@ public class FrameTypeDef {
     }
     
     public class RFIDUserLen{
-    	public static final int  YPLX_LEN 	= 30;							//闁哄秴鍢查幖褏鐚剧拠鑼拷
-    	public static final int  DevNum_LEN = 25;							//閻犲洦娲戝▎銏㈢磽閺嵮冨▏
-    	public static final int  GCMC_LEN 	= 60;							//鐎规悶鍎抽埢濂稿触瀹ュ泦锟�
-    	public static final int  WTDW_LEN 	= 50;							//濠殿喗姊规晶顓㈠础閺囨氨绉�
-    	public static final int  SGDW_LEN 	= 50;							//闁哄倽妫勬导鎰板础閺囨氨绉�
-    	public static final int  GJBW_LEN 	= 70;							//闁哄瀚▎銏ゆ焾閵娿倗绉�
-    	public static final int  JZDW_LEN 	= 50;							//閻熸瑤娴囬惁澶愬础閺囨氨绉�			
+    	public static final int  YPLX_LEN 	= 30;							//闁哄秴鍢查幖褏鐚剧拠鑼�?
+    	public static final int  DevNum_LEN = 25;							//閻犲洦娲戝▎銏㈢磽閺嵮冨�?
+    	public static final int  GCMC_LEN 	= 60;							//鐎规悶鍎抽埢濂稿触瀹ュ泦锟�?    	public static final int  WTDW_LEN 	= 50;							//濠殿喗姊规晶顓㈠础閺囨氨绉�?
+    	public static final int  WTDW_LEN 	= 50;							//濠殿喗姊规晶顓㈠础閺囨氨绉�?
+    	public static final int  SGDW_LEN 	= 50;							//闁哄倽妫勬导鎰板础閺囨氨绉�?
+    	public static final int  GJBW_LEN 	= 70;							//闁哄瀚▎銏ゆ焾閵娿倗绉�?
+    	public static final int  JZDW_LEN 	= 50;							//閻熸瑤娴囬惁澶愬础閺囨氨绉�?		
     	public static final int  JZR_LEN 	= 12;							//閻熸瑤娴囬惁澶嬬閿燂拷
-    	public static final int  JZBH_LEN 	= 30;							//閻熸瑤娴囬惁澶岀磽閺嵮冨▏
-    	public static final int  BZDW_LEN 	= 40;							//闁瑰嘲鑻崺妤呭础閺囨氨绉�
+    	public static final int  JZBH_LEN 	= 30;							//閻熸瑤娴囬惁澶岀磽閺嵮冨�?
+    	public static final int  BZDW_LEN 	= 40;							//闁瑰嘲鑻崺妤呭础閺囨氨绉�?
     	public static final int  PHBBH_LEN 	= 20;							//闂佹澘绉撮幃搴⌒掗弮鍌滄そ闁告瑱鎷�
     	public static final int  SCLSH_LEN 	= 20;							//闁汇垻鍠嶆鍥规担瑙勫瘻闁告瑱鎷�
     	public static final int  YHFS_LEN 	= 20;							//闁稿繒绮慨銏ゅ棘閻熸壆纭�	
@@ -79,10 +79,10 @@ public class FrameTypeDef {
     
     public class RFIDSysLen{
     	public static final int  JCJG_LEN 	=	50;						//婵☆偓鎷风粊鎾嫉閻戞锟�
-        public static final int  WTBH_LEN 	=	20;						//濠殿喗姊规晶顓犵磽閺嵮冨▏
-        public static final int  YPBH_LEN 	=	20;						//闁哄秴鍢查幖褏绱撻弽褍濞�
-        public static final int  HZZ_LEN 	=	7;						//闁肩晫鏌夊ù鍥磹绾绀刱N闁挎冻鎷�
-        public static final int  KYQD_LEN 	=	5;						//闁硅埖顨呯敮鍥ь嚕閸濆嫬顔�(MPa)
+        public static final int  WTBH_LEN 	=	20;						//濠殿喗姊规晶顓犵磽閺嵮冨�?
+        public static final int  YPBH_LEN 	=	20;						//闁哄秴鍢查幖褏绱撻弽褍濞�?
+        public static final int  HZZ_LEN 	=	7;						//闁肩晫鏌夊ù鍥磹绾绀刱N闁挎冻鎷�?
+        public static final int  KYQD_LEN 	=	5;						//闁硅埖顨呯敮鍥ь嚕閸濆嫬顔�?MPa)
         public static final int  SYSJ_LEN 	=	19;						//閻犲洦娲熼悰娆撳籍閸洘锛�
     }
     

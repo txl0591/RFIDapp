@@ -20,7 +20,7 @@ import android.view.View;
 import android.widget.ListView;
 
 public class RFIDReadCard extends RFIDBase implements View.OnClickListener, OnStateReportListener{
-	private final static String TAG = "RFIDReadCard";
+	private final static String tag = "CoreSoft";
 	
 	public final static int RFID_READ_NONE = 0;
 	public final static int RFID_READ_ING = 1;
@@ -141,6 +141,9 @@ public class RFIDReadCard extends RFIDBase implements View.OnClickListener, OnSt
 	@Override
 	public void OnStateReport(int State, byte[] Param) {
 		// TODO Auto-generated method stub		
+		
+		Log.d(tag,"ReadCard OnStateReport stat ["+State+"]");
+		
 		switch(State){
 		case RFIDState.RFID_READ_USER_SUCCESS:
 			mUser = RFIDState.RFID_READ_USER_SUCCESS;

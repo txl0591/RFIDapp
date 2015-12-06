@@ -1,10 +1,15 @@
 package com.rfid.Client;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 import com.rfid.app.R;
 
 import android.bluetooth.BluetoothAdapter;
 import android.content.Context;
 import android.net.wifi.WifiManager;
+import android.os.Handler;
+import android.os.Message;
 import android.util.Log;
 
 import com.rfid.Base.Common;
@@ -21,6 +26,7 @@ import com.rfid.Service.FrameTypeDef.*;
 public class MainClient extends BaseClient implements IntentDef.OnCommDataReportListener {
 	
 	public final static String tag = "CoreSoft" ;
+	public final static int ID_TIMEOUT = 0xF1F1;
 	public final static int BUFFER_MAX = 600;
 	public final static int WRITE_BLK = 16;
 	public Context mContext = null;
@@ -38,6 +44,10 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 	private int mUserType = RFIDUserType.RFID_GUEST;
 	private String mSJBH = null;
 	private int mEdit = 0;
+	private Timer mTimer;
+	private TimerTask mTimerTask;
+	private int mBackCmd = 0;	
+	private boolean mIsEcho = false;
 	
 	public MainClient(Context context, String User, int UserType) {
 		super(context);
@@ -51,6 +61,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		mUser = User;
 		mUserType = UserType;
 		JNI_Init();
+		mTimer = new Timer();
 	}
 	
 	public void MainClientStop(){
@@ -288,7 +299,12 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 	
 	@Override
 	public void OnResponsionReport(int Id, int Cmd, int Ack, byte[] Data, int DataLen) {
-		
+				
+		Log.d(tag,"OnResponsionReport Cmd ["+Cmd+"]");
+		mIsEcho = true;
+		if(mTimerTask != null){
+			mTimerTask.cancel();
+		}
 		switch (Cmd){
 		case 0x24:
 			ReadMultBlk(Data,DataLen);
@@ -376,11 +392,11 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     }
 
     public void BeepOk(){
-        JNI_SendCommondV(JNICommond.JNI_BEEP_OK);
+    	Jni_SendCmdV(JNICommond.JNI_BEEP_OK);
     }
 
     public void BeepErr(){
-        JNI_SendCommondV(JNICommond.JNI_BEEP_ERR);
+    	Jni_SendCmdV(JNICommond.JNI_BEEP_ERR);
     }
     
     public void ReadUserInfo(String[] nstring){
@@ -388,7 +404,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     		mCardNum = null;
         	mOperState = RFIDOper.RFID_READ_USER;
         	mReadbuf = nstring;        	
-        	JNI_SendCommondV(JNICommond.JNI_READ_USER);
+        	Jni_SendCmdV(JNICommond.JNI_READ_USER);
     	}
     }
     
@@ -397,7 +413,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     		mCardNum = null;
         	mOperState = RFIDOper.RFID_READ_USER;
         	mReadbuf = nstring;        	
-        	JNI_SendCommondV(JNICommond.JNI_READ_USERDEFAULT);
+        	Jni_SendCmdV(JNICommond.JNI_READ_USERDEFAULT);
     	}
     }
     
@@ -405,7 +421,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     	mOperState = RFIDOper.RFID_READ_SYS;
     	mReadbuf = nstring;
     	ReadSysMultBytetoString();    	
-    	JNI_SendCommondV(JNICommond.JNI_READ_SYSINFO);
+    	Jni_SendCmdV(JNICommond.JNI_READ_SYSINFO);
     }
         
     public void WriteUserCardOper(){
@@ -415,7 +431,7 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     		byte[] buffer = new byte[16];
         	System.arraycopy(mWritebuf, mWriteBufLen, buffer, 0, 16);
         	mWriteBufLen+=16;
-    		JNI_SendCommondO(JNICommond.JNI_W_USER_CARD, mWriteBlk+blk, blkindex, buffer);
+        	JNI_SendComO(JNICommond.JNI_W_USER_CARD, mWriteBlk+blk, blkindex, buffer);
     	}else{
     		mOperState = RFIDOper.RFID_OPER_NONE;
     		
@@ -451,32 +467,32 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
     }
         
     public void WriteCrcBlkToCard(int CardType){    	
-    	JNI_SendCommondI(JNICommond.JNI_W_CRCBLK_CARD,CardType);
+    	Jni_SendCmdI(JNICommond.JNI_W_CRCBLK_CARD,CardType);
     }
 
     public void WriteCrcBlkToRom(){
-    	JNI_SendCommondV(JNICommond.JNI_W_CRCBLK_ROM);
+    	Jni_SendCmdV(JNICommond.JNI_W_CRCBLK_ROM);
     }
         
     public void RecoverSys(){
-    	JNI_SendCommondV(JNICommond.JNI_RECOVERY_SYS);
+    	Jni_SendCmdV(JNICommond.JNI_RECOVERY_SYS);
     }
     
     public void GetVersion(String[] str){
     	mReadbuf = str;
-    	JNI_SendCommondV(JNICommond.JNI_GET_VERSION);
+    	Jni_SendCmdV(JNICommond.JNI_GET_VERSION);
     }
     
     public void PowerOnInit(){
-    	JNI_SendCommondV(JNICommond.JNI_POWER_ON);
+    	Jni_SendCmdV(JNICommond.JNI_POWER_ON);
     }
     
     public void GetCardId(){
-        JNI_SendCommondV(JNICommond.JNI_GET_CARDID);
+    	Jni_SendCmdV(JNICommond.JNI_GET_CARDID);
     }
     
     public void GetCardType(){
-    	JNI_SendCommondV(JNICommond.JNI_GET_CARDTYPE);
+    	Jni_SendCmdV(JNICommond.JNI_GET_CARDTYPE);
     }
     
     public String getWIFIMac(){
@@ -489,6 +505,85 @@ public class MainClient extends BaseClient implements IntentDef.OnCommDataReport
 		return m_BluetoothAdapter.getAddress();
 	}
     	
+	public boolean Jni_SendCmdV(int cmd)
+	{
+		OpenSendCmdTimer(cmd);
+		return JNI_SendCommondV(cmd);
+	}
+	
+	public boolean Jni_SendCmdI(int cmd,int param)
+	{
+		OpenSendCmdTimer(cmd);
+		return JNI_SendCommondI(cmd,param);
+	}
+	
+	public boolean JNI_SendComO(int cmd, int param1, int param2, byte[] Data)
+	{
+		OpenSendCmdTimer(cmd);
+		return JNI_SendCommondO(cmd, param1, param2, Data);
+	}
+	
+	private void OpenSendCmdTimer(int cmd){
+		switch(cmd)
+		{
+		case JNICommond.JNI_BEEP_OK:
+		case JNICommond.JNI_BEEP_ERR:
+			mBackCmd = 0x32;
+			break;
+		case JNICommond.JNI_READ_USER:
+		case JNICommond.JNI_READ_USERDEFAULT:
+		case JNICommond.JNI_READ_SYSINFO:	
+			mBackCmd = 0x24;
+			break;
+	
+		case JNICommond.JNI_W_USER_CARD:
+			mBackCmd = 0x23;
+			break;
+		case JNICommond.JNI_W_CRCBLK_CARD:
+			mBackCmd = 0x21;
+			break;
+		case JNICommond.JNI_W_CRCBLK_ROM:
+			mBackCmd = 0x14;
+			break;
+		case JNICommond.JNI_RECOVERY_SYS:
+			mBackCmd = 0x33;
+			break;
+		case JNICommond.JNI_GET_VERSION:
+			mBackCmd = 0x25;
+			break;
+		case JNICommond.JNI_GET_CARDID:
+			mBackCmd = 0x25;
+			break;
+		case JNICommond.JNI_GET_CARDTYPE:
+			mBackCmd = 0x15;
+			break;
+		case JNICommond.JNI_POWER_ON:	
+			mBackCmd = 0x31;
+			break;
+			
+		default:
+			mBackCmd = 0;	
+			break;
+		}
+		
+		mIsEcho = false;
+		if(mTimerTask != null){
+			mTimerTask.cancel();
+		}
+		mTimerTask = new TimerTask() {  
+	        @Override  
+	        public void run() {	        	
+	        	if(mIsEcho == false){
+	        		byte[] Data = new byte[20];
+					Data[0] = FrameCommondEcho.ECHO_ERR;
+					OnResponsionReport(1, mBackCmd, 1, Data, 20);
+	        	}
+				mIsEcho = false;
+	        }  
+	    };
+		mTimer.schedule(mTimerTask, 1000);
+	}
+	
   	static
   	{	
   		System.loadLibrary("RFIDJni");

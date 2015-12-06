@@ -93,7 +93,6 @@ public class SnapInfoDBHelper extends SQLiteOpenHelper {
         	insert = false; 
         }
         c.close();
-        Log.d(tag, " SnapInfoDBHelper======== add=============["+insert+"] SJBH ["+SJBH+"]");
 		if(insert){
 			mContentValues.put(TBL_SJBH, SJBH);
 	    	mContentValues.put(TBL_SNAPLEN, SnapLen);
